@@ -155,6 +155,7 @@ End the conversation on a polite and positive note.
   },
 };
 
+// what we are expecting from the feedback
 export const feedbackSchema = z.object({
   totalScore: z.number(),
   categoryScores: z.tuple([
