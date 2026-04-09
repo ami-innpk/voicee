@@ -8,7 +8,8 @@ import { createFeedback } from "@/lib/actions/general.action";
 import { interviewer } from "@/constants";
 import { cn } from "@/lib/utils";
 
-
+const ASSISTAND_ID = "25326636-0e48-4134-8419-b45989a215f8";
+const SQUAD_ID = "08ac03b3-c29b-451e-b5d6-c6a4618ba12d";
 
 enum CallStatus {
   INACTIVE = "INACTIVE",
@@ -119,12 +120,21 @@ const Agent = ({
     setCallStatus(CallStatus.CONNECTING);
 
     if (type === "generate") {
-      await vapi.start(process.env.NEXT_PUBLIC_VAPI_WORKFLOW_ID!, {
+      // await vapi.start(process.env.NEXT_PUBLIC_VAPI_WORKFLOW_ID!, {
+      //   variableValues: {
+      //     username: userName,
+      //     userid: userId,
+      //   },
+      // });
+
+      await vapi.start(ASSISTAND_ID, {
         variableValues: {
           username: userName,
           userid: userId,
         },
       });
+
+   
     } else {
       let formattedQuestions = "";
       if (questions) {
@@ -186,7 +196,7 @@ const Agent = ({
               key={lastMessage}
               className={cn(
                 "transition-opacity duration-500 opacity-0",
-                "animate-fadeIn opacity-100"
+                "animate-fadeIn opacity-100",
               )}
             >
               {lastMessage}
@@ -201,7 +211,7 @@ const Agent = ({
             <span
               className={cn(
                 "absolute animate-ping rounded-full opacity-75",
-                callStatus !== "CONNECTING" && "hidden"
+                callStatus !== "CONNECTING" && "hidden",
               )}
             />
 
